@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YB NetBanking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        samp{
+            font-weight: bolder;
+            background-origin: padding-box;
+            font-style: italic;
+            font-family: Cambria;
+            color:red;
+        }
+        label{
+            color: #000;
+            font: bolder;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+<span class="border border-secondary-subtle"></span>
+    <div class="container">
+        <form action="">
+          <div class="signup-layout">
+            <div id="header"  class="text-center">
+              <h1>Welcome to <samp>Y</samp>our <samp>B</samp>ank</h1>
+           </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                placeholder="Enter your Name"
+                required
+             />
+            </div>
+            <div class="mb-3">
+                <label for="user-id" class="form-label" >User-id</label>
+                <input type="text"
+                    id="user-id"
+                    name="user-id"
+                    class="form-control"
+                    placeholder="Enter your User-id"
+                    required
+                    >
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password"
+                    id="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Enter your password"
+                    required
+                    >
+            </div>
+            <div class="mb-3">
+                <label for="conform-password" class="form-label">Conform Password</label>
+                <input type="password"
+                       class="form-control"
+                    id="conform-password"
+                    name="conform-password"
+                    placeholder="Enter your Conform-password"
+                    required
+                    >
+            </div>
+            <div class="mb-3">
+              <label for="date-of-birth" class="form-label">Date-of-Birth</label>
+              <input
+                type="date"
+                class="form-control"
+                id="date-of-birth"
+               name="date-of-birth"
+                placeholder="Enter your Date-of-Birth"
+                required
+              />
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea
+                name="address"
+                class="form-control"
+                id="address"
+                placeholder="Enter your address"
+                rows="3"
+                cols="40"
+                required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email"
+                name="email"
+                class="form-control"
+                id="email"
+                placeholder="Enter your Email-id"
+                required>
+            </div>
+            <div class="mb-3">
+                <label for="number" class="form-label">Mobile Number</label>
+                <input type="number"
+                name="number"
+                class="form-control"
+                id="number"
+                placeholder="Enter your Number"
+                required>
+            </div>
+            <div class="mb-3">
+                <label for="balance" class="form-label">Opening Balance</label>
+                <input type="number" name="balance" id="balance" class="form-control"
+                placeholder="Enter your opening balance amount"
+                required>
+            </div>
+            <div id="button"  class="d-grid gap-2 col-6 mx-auto">
+              <button type="submit" class="btn btn-outline-primary">Sign-up</button>
+            </div>
+          </div>
+        </form>
+      </div>
+</body>
+</html>
