@@ -9,9 +9,8 @@
     <style>
         samp{
             font-weight: bolder;
-            background-origin: padding-box;
-            font-style: italic;
-            font-family: Cambria;
+           font-size: 120%;
+            font-style: italic;  
             color:red;
         }
         label{
@@ -19,16 +18,18 @@
             font: bolder;
             font-weight: bolder;
         }
-    </style>
+        </style>
 </head>
-<body>
-<span class="border border-secondary-subtle"></span>
-    <div class="container">
+<body style="background-color: rgb(214, 214, 214);">
+    <span class="border border-secondary-subtle"></span>
+  <nav  style="background-color: rgb(238, 238, 242);">
+   <div id="header">
+    <h2 style="text-align: center;font-style: italic;">REGISTER YOUR NEW <samp>Y</samp>OUR <samp>B</samp>ANK ACCOUNT</h2>
+   </div>
+  </nav>
+    <div class="container"style="padding: 5%;">
         <form action="">
-          <div class="signup-layout">
-            <div id="header"  class="text-center">
-              <h1>Welcome to <samp>Y</samp>our <samp>B</samp>ank</h1>
-           </div>
+          <div class="row justify-content-center">
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
               <input
@@ -41,7 +42,7 @@
              />
             </div>
             <div class="mb-3">
-                <label for="user-id" class="form-label" >User-id</label>
+                <label for="user-id" class="form-label">User-id</label>
                 <input type="text"
                     id="user-id"
                     name="user-id"
@@ -63,9 +64,9 @@
             <div class="mb-3">
                 <label for="conform-password" class="form-label">Conform Password</label>
                 <input type="password"
-                       class="form-control"
                     id="conform-password"
                     name="conform-password"
+                    class="form-control"
                     placeholder="Enter your Conform-password"
                     required
                     >
@@ -74,50 +75,51 @@
               <label for="date-of-birth" class="form-label">Date-of-Birth</label>
               <input
                 type="date"
-                class="form-control"
                 id="date-of-birth"
                name="date-of-birth"
+               class="form-control"
                 placeholder="Enter your Date-of-Birth"
                 required
               />
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
-                <textarea
-                name="address"
-                class="form-control"
+                <textarea  
+                name="address" 
                 id="address"
                 placeholder="Enter your address"
                 rows="3"
                 cols="40"
+                class="form-control"
                 required></textarea>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email"
-                name="email"
-                class="form-control"
+                <input type="email" 
+                name="email" 
                 id="email"
+                class="form-control"
                 placeholder="Enter your Email-id"
                 required>
             </div>
             <div class="mb-3">
                 <label for="number" class="form-label">Mobile Number</label>
-                <input type="number"
-                name="number"
-                class="form-control"
+                <input type="number" 
+                name="number" 
                 id="number"
+                class="form-control"
                 placeholder="Enter your Number"
                 required>
             </div>
-            <div class="mb-3">
-                <label for="balance" class="form-label">Opening Balance</label>
+            <div class="mb-5">
+                <label for="balance" class="form-label">Opening Blance</label>
                 <input type="number" name="balance" id="balance" class="form-control"
                 placeholder="Enter your opening balance amount"
                 required>
             </div>
-            <div id="button"  class="d-grid gap-2 col-6 mx-auto">
-              <button type="submit" class="btn btn-outline-primary">Sign-up</button>
+            <div id="button" style="text-align: center;">
+              <button type="submit" class="btn btn-outline-primary" style="border-radius: 30px; padding-left: 35%;padding-right: 35%;">REGISTER</button> 
+             
             </div>
           </div>
         </form>
