@@ -145,3 +145,7 @@ def register():
             return 'Something problem your data is not stored in database.. Please try again..'
     else:
         return 'something problem'
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)
