@@ -140,9 +140,10 @@ def register():
             ]
             my_cursor.execute(insert_value, values)
             my_cursor.commit()
-            return 'Your account is successfully created'
+            return redirect('/success')
         except ValueError:
             return 'Something problem your data is not stored in database.. Please try again..'
+
     else:
         return 'something problem'
 
