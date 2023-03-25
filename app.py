@@ -58,7 +58,6 @@ def register():
         userid = req['userid']
         password = req['password']
         conform_password = req['conform_password']
-        question = req['security_question']
         answer = req['answer']
         dob = req['dob']
         address = req['address']
@@ -137,11 +136,11 @@ def register():
 
         try:
             insert_value = text("insert into customer_details (name, user_id, password, age, address,  number, email,"
-                                "opening_balance,question, answer) VALUES (:name,:userid,:password,:age,:address,"
-                                ":number,:email,:balance,:question,:answer)")
+                                "opening_balance, answer) VALUES (:name,:userid,:password,:age,:address,"
+                                ":number,:email,:balance,:answer)")
             values = [
                 {'name': name, 'userid': userid, 'password': password, 'age': age, 'address': address,
-                 'number': number, 'email': email, 'balance': balance, 'question': question, 'answer': answer}]
+                 'number': number, 'email': email, 'balance': balance, 'answer': answer}]
             my_cursor.execute(insert_value, values)
             my_cursor.commit()
             return redirect('/main.html')
