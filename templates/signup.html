@@ -61,6 +61,9 @@
                     required
                     >
             </div>
+            <div id="passwordHelpBlock" class="form-text">
+              Your password must be 8-20 characters long, contain upper and lower case letters, numbers and special characters, and must not contain spaces or emoji.
+            </div>
             <div class="mb-3">
                 <label for="conform_password" class="form-label">Conform Password</label>
                 <input type="password"
@@ -70,6 +73,31 @@
                     placeholder="Enter your Conform-password"
                     required
                     >
+            </div>
+              <div  class="mb-3">
+              <label for="security_question" class="form-label">Security Question</label>
+              <select id="security_question" class="form-select" aria-label="Default select example">
+                <option selected>Select Question</option>
+                <option>What was the name of your first pet?</option>
+                <option>What is your mother's maiden name?</option>
+                <option>What was the make and model of your first car?</option>
+                <option>What city were you born in?</option>
+                <option>What is your favorite color?</option>
+                <option>What is the name of your favorite teacher?</option>
+                <option>What is the name of your best friend?</option>
+                <option>What was the name of the street you grew up on?</option>
+                <option>What was the name of the first company you worked for?</option>
+                <option>What is your favorite book?</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="answer" class="form-label">Security Answer</label>
+              <input type="text" id="answer" class="form-control"
+                name="answer"
+                placeholder="Enter your security answer"
+                required
+                />
+
             </div>
             <div class="mb-3">
               <label for="dob" class="form-label">Date-of-Birth</label>

@@ -58,6 +58,8 @@ def register():
         userid = req['userid']
         password = req['password']
         conform_password = req['conform_password']
+        question = req['security_question']
+        answer = req['answer']
         dob = req['dob']
         address = req['address']
         email = req['email']
@@ -90,6 +92,9 @@ def register():
             return "Not valid ! It should not contain any space"
         elif password != conform_password:
             return 'Your password is mismatch'
+
+        if not answer.strip():
+            return 'Enter your security answer'
 
         birthdate = datetime.strptime(dob, '%Y-%m-%d')
         today = datetime.today()
@@ -132,20 +137,118 @@ def register():
 
         try:
             insert_value = text("insert into customer_details (name, user_id, password, age, address,  number, email,"
-                                "opening_balance) VALUES (:name,:userid,:password,:age,:address,:number,:email,"
-                                ":balance)")
+                                "opening_balance,question, answer) VALUES (:name,:userid,:password,:age,:address,"
+                                ":number,:email,:balance,:question,:answer)")
             values = [
-                {'name': name, 'userid': userid, 'password': password, 'age': age, 'address': address, 'number': number,
-                 'email': email, 'balance': balance},
-            ]
+                {'name': name, 'userid': userid, 'password': password, 'age': age, 'address': address,
+                 'number': number, 'email': email, 'balance': balance, 'question': question, 'answer': answer}]
             my_cursor.execute(insert_value, values)
             my_cursor.commit()
-            return redirect('/success')
-        except ValueError:
+            return redirect('/main.html')
+        except ConnectionResetError:
+            my_cursor.rollback()
             return 'Something problem your data is not stored in database.. Please try again..'
 
     else:
         return 'something problem'
+
+
+@app.route('/forgotpassword.html', methods=['POST', 'GET'])
+def forgot_password():
+    return render_template("forgotpassword.html")
+
+
+@app.route('/forgot_pass', methods=['POST', 'GET'])
+def forgot_pass():
+    if request.method == "POST":
+        req = request.form.to_dict()
+        userid = req['userid']
+        question = req['security_question']
+        answer = req['answer']
+        if userid.islower():
+            query = text('SELECT user_id FROM customer_details WHERE user_id = :userid')
+            value = [{'userid': userid}]
+            data = my_cursor.execute(query, value)
+            if not data.fetchone():
+                return 'Incorrect User-id..'
+        else:
+            return 'User-id must be in lowercase..'
+
+        try:
+            query = text('SELECT question FROM customer_details WHERE userid = :userid')
+            value = [{'userid': userid}]
+            data = my_cursor.execute(query, value)
+            stored_question = data.fetchone()
+            if stored_question != question:
+                return 'Your security question or answer are incorrect....'
+        except ValueError:
+            return 'Something problem try again'
+
+        try:
+            query = text('SELECT answer FROM customer_details WHERE userid = :userid')
+            value = [{'userid': userid}]
+            data = my_cursor.execute(query, value)
+            stored_answer = data.fetchone()
+            if stored_answer != answer:
+                return 'Your security question or answer are incorrect....'
+        except ConnectionRefusedError:
+            return 'Something problem try again'
+        return redirect('/create_new_password.html')
+    else:
+        return 'Something problem try again after some time'
+
+
+@app.route('/create_new_password.html', methods=['POST', 'GET'])
+def create_new_password():
+    return render_template('create_new_password.html')
+
+
+@app.route('/new_pass', methods=['POST', 'GET'])
+def new_pass():
+    if request.method == 'POST':
+        req = request.form.to_dict()
+        email = req['email']
+        password = req['password']
+        conform_pass = req['conform_pass']
+
+        if not email.endswith('.com'):
+            return 'E-mail_id format is not correct'
+        elif email.islower():
+            query = text('SELECT email FROM customer_details WHERE email = :email')
+            value = [{'email': email}]
+            data = my_cursor.execute(query, value)
+            stored_email = data.fetchone()
+            if stored_email != email:
+                return 'Invalid Email-id'
+        else:
+            return 'E-mail_id should not contain any uppercase letter'
+
+        if len(password) < 8:
+            return "Not valid ! Total characters should be grater than 8"
+        elif not re.search("[A-Z]", password):
+            return "Not valid ! It should contain at least one uppercase letter"
+        elif not re.search("[a-z]", password):
+            return "Not valid ! It should contain at least one lowercase letter"
+        elif not re.search("[1-9]", password):
+            return "Not valid ! It should contain at least one number"
+        elif not re.search("[~!@#$%^&*]", password):
+            return "Not valid ! It should contain at least one special character"
+        elif re.search(r"\s", password):
+            return "Not valid ! It should not contain any space"
+        elif password != conform_pass:
+            return 'Your password is mismatch'
+
+        try:
+            query = text("UPDATE customer_details SET password = :password WHERE email = :email")
+            value = [{'password': password}, {'email': email}]
+            my_cursor.execute(query, value)
+            my_cursor.commit()
+            return redirect('/main.html')
+        except NotImplemented:
+            my_cursor.rollback()
+            return 'Something problem try again after some time'
+    else:
+        return 'Something problem try again after some time'
 
 
 if __name__ == '__main__':
