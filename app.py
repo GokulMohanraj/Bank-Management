@@ -1,9 +1,10 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, session
 import re
 from datetime import datetime
 from database import my_cursor, text
 
 app = Flask(__name__)
+app.secret_key = "mysecretkey"
 
 
 @app.route('/<string:page_name>')
@@ -21,6 +22,7 @@ def submit():
     if request.method == 'POST':
         req = request.form
         userid = req['userid']
+        session['userid'] = userid
         password = req['password']
         if not userid.islower():
             return 'user-id must be in lowercase'
@@ -45,6 +47,17 @@ def submit():
         return 'something problem'
 
 
+@app.route('/signin.html', methods=['POST', 'GET'])
+def signin():
+    userid = session['userid']
+    query = text("SELECT name FROM customer_details WHERE user_id = :userid")
+    value = [{'userid': userid}]
+    data = my_cursor.execute(query, value)
+    username = data.fetchone()
+    name = username[0]
+    return render_template('signin.html', name=name)
+
+
 @app.route('/signup.html', methods=['POST', 'GET'])
 def signup():
     return render_template("signup.html")
@@ -58,7 +71,6 @@ def register():
         userid = req['userid']
         password = req['password']
         conform_password = req['conform_password']
-        question = req['security_question']
         answer = req['answer']
         dob = req['dob']
         address = req['address']
@@ -137,11 +149,11 @@ def register():
 
         try:
             insert_value = text("insert into customer_details (name, user_id, password, age, address,  number, email,"
-                                "opening_balance,question, answer) VALUES (:name,:userid,:password,:age,:address,"
-                                ":number,:email,:balance,:question,:answer)")
+                                "opening_balance, answer) VALUES (:name,:userid,:password,:age,:address,"
+                                ":number,:email,:balance,:answer)")
             values = [
                 {'name': name, 'userid': userid, 'password': password, 'age': age, 'address': address,
-                 'number': number, 'email': email, 'balance': balance, 'question': question, 'answer': answer}]
+                 'number': number, 'email': email, 'balance': balance, 'answer': answer}]
             my_cursor.execute(insert_value, values)
             my_cursor.commit()
             return redirect('/main.html')
@@ -163,7 +175,6 @@ def forgot_pass():
     if request.method == "POST":
         req = request.form.to_dict()
         userid = req['userid']
-        question = req['security_question']
         answer = req['answer']
         if userid.islower():
             query = text('SELECT user_id FROM customer_details WHERE user_id = :userid')
@@ -175,21 +186,12 @@ def forgot_pass():
             return 'User-id must be in lowercase..'
 
         try:
-            query = text('SELECT question FROM customer_details WHERE userid = :userid')
-            value = [{'userid': userid}]
-            data = my_cursor.execute(query, value)
-            stored_question = data.fetchone()
-            if stored_question != question:
-                return 'Your security question or answer are incorrect....'
-        except ValueError:
-            return 'Something problem try again'
-
-        try:
-            query = text('SELECT answer FROM customer_details WHERE userid = :userid')
+            query = text('SELECT answer FROM customer_details WHERE user_id = :userid')
             value = [{'userid': userid}]
             data = my_cursor.execute(query, value)
             stored_answer = data.fetchone()
-            if stored_answer != answer:
+            ans = stored_answer[0]
+            if ans != answer:
                 return 'Your security question or answer are incorrect....'
         except ConnectionRefusedError:
             return 'Something problem try again'
@@ -218,7 +220,8 @@ def new_pass():
             value = [{'email': email}]
             data = my_cursor.execute(query, value)
             stored_email = data.fetchone()
-            if stored_email != email:
+            mail = stored_email[0]
+            if mail != email:
                 return 'Invalid Email-id'
         else:
             return 'E-mail_id should not contain any uppercase letter'
@@ -240,7 +243,7 @@ def new_pass():
 
         try:
             query = text("UPDATE customer_details SET password = :password WHERE email = :email")
-            value = [{'password': password}, {'email': email}]
+            value = [{'password': password, 'email': email}]
             my_cursor.execute(query, value)
             my_cursor.commit()
             return redirect('/main.html')
