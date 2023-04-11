@@ -3,23 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Signin</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- Custom CSS -->
     <style>
         body {
             background-color: rgb(205, 206, 207);
         }
         .form-container {
-            max-width: 400px;
+            max-width: 700px;
             margin: 0 auto;
-            padding-top: 50px;
+            padding-top: 100px;
         }
-        h1 {
+        #name {
             text-align: center;
             color: #007bff;
             margin-bottom: 50px;
+            text-transform: uppercase;
         }
+        samp{
+            color: red;
+            font-size: larger;
+            font-style: italic;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -41,30 +50,30 @@
 </head>
 <body>
     <div class="form-container">
-        <h1>Welcome {{name}}</h1>
-        <table>
-            <tbody>
-                <tr>
-                    <td><h4>Account Balance</h4></td>
-                    <td><button class="btn btn-outline-secondary" type="submit" onclick="showBalance()">Enquire</button></td>
-                </tr>
-                <tr>
-                    <td><h4>Withdraw</h4></td>
-                    <td><button class="btn btn-outline-secondary" type="submit">Withdraw</button></td>
-                </tr>
-                <tr>
-                    <td><h4>Deposit</h4></td>
-                    <td><button class="btn btn-outline-secondary" type="submit">Deposit</button></td>
-                </tr>
-                <tr>
-                    <td><h4>Update Profile</h4></td>
-                    <td><button class="btn btn-outline-success" type="submit">Update Profile</button></td>
-                </tr>
-                <tr>
-                    <td><h4>Logout</h4></td>
-                    <td><button class="btn btn-outline-danger" type="submit" formaction="logout.html">Logout</button></td>
-                </tr>
-            </tbody>
-        </table>
+        <h1 id="name"><samp>WELCOME</samp> {{name}}</h1>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><h4>Account Balance</h4></td>
+                        <td><button class="btn btn-outline-secondary" type="submit" onclick="showBalance()">Enquire</button></td>
+                    </tr>
+                    <tr>
+                        <td><h4>Withdraw</h4></td>
+                        <td><button class="btn btn-outline-secondary" type="submit">Withdraw</button></td>
+                    </tr>
+                    <tr>
+                        <td><h4>Deposit</h4></td>
+                        <td><button class="btn btn-outline-secondary" type="submit">Deposit</button></td>
+                    </tr>
+                    <tr>
+                        <td><h4>Update Profile</h4></td>
+                        <td><button class="btn btn-outline-success" type="submit">Update Profile</button></td>
+                    </tr>
+                     <tr>
+                        <td><h4>Logout</h4></td>
+                        <td><a href="logout.html"><button class="btn btn-outline-danger" type="submit">Logout</button></a></td>
+                    </tr>
+                </tbody>
+            </table>
     </div>
 </body>
