@@ -17,6 +17,17 @@ def main():
     return render_template("main.html")
 
 
+@app.route('/signin.html', methods=['POST', 'GET'])
+def signin():
+    userid = session['userid']
+    query = text("SELECT name FROM customer_details WHERE user_id = :userid")
+    value = [{'userid': userid}]
+    data = my_cursor.execute(query, value)
+    username = data.fetchone()
+    name = username[0]
+    return render_template('signin.html', name=name)
+
+
 @app.route('/submit', methods=['POST', 'GET'])
 def submit():
     if request.method == 'POST':
@@ -45,17 +56,6 @@ def submit():
             return redirect("/signin.html")
     else:
         return 'something problem'
-
-
-@app.route('/signin.html', methods=['POST', 'GET'])
-def signin():
-    userid = session['userid']
-    query = text("SELECT name FROM customer_details WHERE user_id = :userid")
-    value = [{'userid': userid}]
-    data = my_cursor.execute(query, value)
-    username = data.fetchone()
-    name = username[0]
-    return render_template('signin.html', name=name)
 
 
 @app.route('/signup.html', methods=['POST', 'GET'])
@@ -252,6 +252,90 @@ def new_pass():
             return 'Something problem try again after some time'
     else:
         return 'Something problem try again after some time'
+
+
+@app.route('/change_number.html', methods=['POST', 'GET'])
+def change_number():
+    return render_template('change_number.html')
+
+
+@app.route('/change_number', methods=['POST', 'GET'])
+def change_num():
+    if request.method == 'POST':
+        req = request.form
+        userid = session['userid']
+        number = req['number']
+        try:
+            query = text("UPDATE customer_details SET number = :number WHERE user_id = :userid")
+            value = [{'number': number, 'userid': userid}]
+            my_cursor.execute(query, value)
+            my_cursor.commit()
+            return redirect('/signin.html')
+        except NotImplemented:
+            my_cursor.rollback()
+            return 'Something problem try again after some time'
+    else:
+        return 'something problem'
+
+
+@app.route('/change_mail.html', methods=['POST', 'GET'])
+def change_mail():
+    return render_template('change_mail.html')
+
+
+@app.route('/change_mail', methods=['POST', 'GET'])
+def change_mail_id():
+    if request.method == 'POST':
+        req = request.form
+        userid = session['userid']
+        mail = req['mail']
+        try:
+            query = text("UPDATE customer_details SET email = :mail WHERE user_id = :userid")
+            value = [{'email': mail, 'userid': userid}]
+            my_cursor.execute(query, value)
+            my_cursor.commit()
+            return redirect('/signin.html')
+        except NotImplemented:
+            my_cursor.rollback()
+            return 'Something problem try again after some time'
+    else:
+        return 'something problem'
+
+
+@app.route('/change_address.html', methods=['POST', 'GET'])
+def change_address():
+    return render_template('change_address.html')
+
+
+@app.route('/change_address', methods=['POST', 'GET'])
+def change_add():
+    if request.method == 'POST':
+        req = request.form
+        userid = session['userid']
+        address = req['address']
+        try:
+            query = text("UPDATE customer_details SET address = :address WHERE user_id = :userid")
+            value = [{'address': address, 'userid': userid}]
+            my_cursor.execute(query, value)
+            my_cursor.commit()
+            return redirect('/signin.html')
+        except NotImplemented:
+            my_cursor.rollback()
+            return 'Something problem try again after some time'
+    else:
+        return 'something problem'
+
+
+@app.route('/logout.html', methods=['POST', 'GET'])
+def logout():
+    userid = session['userid']
+    query = text("SELECT name FROM customer_details WHERE user_id = :userid")
+    value = [{'userid': userid}]
+    data = my_cursor.execute(query, value)
+    username = data.fetchone()
+    name = username[0]
+    session['userid'] = None
+    return render_template('logout.html', name=name)
 
 
 if __name__ == '__main__':

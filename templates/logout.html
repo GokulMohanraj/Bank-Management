@@ -7,16 +7,27 @@
     <meta >
     <title>logout</title>
     <style>
+         body {
+            background-color: rgb(205, 206, 207);
+        }
         h1{
             padding: auto;
             text-align: center;
             padding-top: 250px;
-            color: blue;
+            color: rgb(0, 213, 255);
+        }
+        samp{
+            padding: auto;
+            text-align: center;
+            padding-top: 250px;
+            color: rgb(183, 29, 29);
+            font-weight: bolder;
         }
     </style>
 </head>
 <body>
-    <h1>Thanks for banking {{name}}</h1>
-
+    <form action="logout" method="post">
+        <h1>Thanks for banking <samp>{{name}}</samp></h1>
+    </form>
 </body>
 </html>

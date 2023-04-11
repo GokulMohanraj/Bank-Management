@@ -5,10 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Signin</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <!-- Custom CSS -->
-    <style>
+     <style>
         body {
             background-color: rgb(205, 206, 207);
         }
@@ -22,11 +20,6 @@
             color: #007bff;
             margin-bottom: 50px;
             text-transform: uppercase;
-        }
-        samp{
-            color: red;
-            font-size: larger;
-            font-style: italic;
         }
 
         table {
@@ -50,28 +43,24 @@
 </head>
 <body>
     <div class="form-container">
-        <h1 id="name"><samp>WELCOME</samp> {{name}}</h1>
+        <h1 id="name">Profile Update</h1>
             <table>
                 <tbody>
                     <tr>
-                        <td><h4>Account Balance</h4></td>
-                        <td><button class="btn btn-outline-secondary" type="submit" onclick="showBalance()">Enquire</button></td>
+                        <td><h4>Change Password</h4></td>
+                        <td><a href="create_new_password.html"><button class="btn btn-outline-secondary" type="submit">Click here</button></a></td>
                     </tr>
                     <tr>
-                        <td><h4>Withdraw</h4></td>
-                        <td><button class="btn btn-outline-secondary" type="submit">Withdraw</button></td>
+                        <td><h4>Change Mobile-number</h4></td>
+                        <td><a href="change_number.html"><button class="btn btn-outline-secondary" type="submit">Click here</button></a></td>
                     </tr>
                     <tr>
-                        <td><h4>Deposit</h4></td>
-                        <td><button class="btn btn-outline-secondary" type="submit">Deposit</button></td>
+                        <td><h4>Change Mail-id</h4></td>
+                        <td><a href="change_mail.html"><button class="btn btn-outline-secondary" type="submit">Click here</button></a></td>
                     </tr>
                     <tr>
-                        <td><h4>Update Profile</h4></td>
-                        <td><a href="update_profile.html"><button class="btn btn-outline-success" type="submit">Update Profile</button></a></td>
-                    </tr>
-                     <tr>
-                        <td><h4>Logout</h4></td>
-                        <td><a href="logout.html"><button class="btn btn-outline-danger" type="submit">Logout</button></a></td>
+                        <td><h4>Change Address</h4></td>
+                        <td><a href="change_address.html"><button class="btn btn-outline-secondary" type="submit">Click here</button></a></td>
                     </tr>
                 </tbody>
             </table>
