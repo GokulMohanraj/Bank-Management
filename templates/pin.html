@@ -9,8 +9,8 @@
     <style>
         samp{
             font-weight: bolder;
-           font-size: 130%;
-            font-style: italic;
+           font-size: 120%;
+            font-style: italic;  
             color:red;
         }
         label{
@@ -18,7 +18,7 @@
             font: bolder;
             font-weight: bolder;
         }
-         p{
+        p{
             color:red;
             text-align: center;
         }
@@ -28,30 +28,38 @@
         <span class="border border-secondary-subtle"></span>
         <nav  style="background-color: rgb(238, 238, 242);">
          <div id="header">
-          <h1 style="text-align: center;font-style: italic;"><samp>U</samp>pdate <samp>A</samp>ddress</h1>
+          <h1 style="text-align: center;font-style: italic;"><samp>C</samp>reate <samp>M</samp>-pin</h1>
          </div>
         </nav>
     <div class="row justify-content-center" style="padding: 10%;">
-        <form action="change_address" method="post">
+        <form action="pin" method="post">
             <div class="mb-4">
-                <label for="address" class="form-label">Address</label>
-                <textarea
-                name="address"
-                id="address"
-                placeholder="Enter your new address"
-                rows="3"
-                cols="40"
+                <label for="pin" class="form-label">New M-pin</label>
+                <input type="password"
+                name="pin"
+                id="pin"
                 class="form-control"
-                required></textarea>
+                placeholder="Create your new pin"
+                required>
             </div>
+            <div class="mb-4" >
+                <label for="m_pin" class="form-label">Conform M-pin</label>
+                <input type="password"
+                name="m_pin"
+                id="m_pin"
+                class="form-control"
+                placeholder="Conform your M-pin"
+                required>
+            </div>
+           
             <div id="button" style="text-align: center;">
                 <br>
                 <button type="submit" class="btn btn-outline-primary" style="border-radius: 40px;padding-left: 25%;padding-right: 25%;">Submit</button>
             </div>
         </form>
-        {% if return_message %}
+         {% if return_message %}
             <p>{{ return_message }}</p>
-        {% endif %}
+         {% endif %}
     </div>
 </body>
 </html>
