@@ -270,7 +270,7 @@ def change_num():
             value = [{'number': number, 'userid': userid}]
             my_cursor.execute(query, value)
             my_cursor.commit()
-            return redirect('/signin.html')
+            return redirect('/update_profile.html')
         except NotImplemented:
             my_cursor.rollback()
             return 'Something problem try again after some time'
@@ -294,7 +294,7 @@ def change_mail_id():
             value = [{'email': mail, 'userid': userid}]
             my_cursor.execute(query, value)
             my_cursor.commit()
-            return redirect('/signin.html')
+            return redirect('/update_profile.html')
         except NotImplemented:
             my_cursor.rollback()
             return 'Something problem try again after some time'
@@ -318,7 +318,7 @@ def change_add():
             value = [{'address': address, 'userid': userid}]
             my_cursor.execute(query, value)
             my_cursor.commit()
-            return redirect('/signin.html')
+            return redirect('/update_profile.html')
         except NotImplemented:
             my_cursor.rollback()
             return 'Something problem try again after some time'
